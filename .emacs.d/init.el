@@ -1,14 +1,42 @@
-;; init.el
+; init.el
 
 ;; ###########################################
-;;  packageの設定
+;;  el-getの設定
 ;; ###########################################
-(package-initialize)
 
-(when (require 'package nil t)
-  (add-to-list 'package-archives
-	       '("melpa-stable" . "https://stable.melpa.org.packages/"))
-  (package-initialize))
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+;(package-initialize)
+
+(when load-file-name
+  (setq user-emacs-directory (file-name-directory load-file-name)))
+(add-to-list 'load-path (locate-user-emacs-file "el-get"))
+(require 'el-get)
+(setq el-get-dir (locate-user-emacs-file "lisp"))
+
+
+;; ###########################################
+;;  パッケージのインストールと設定
+;; ###########################################
+(el-get-bundle helm)
+(require 'helm)
+(global-set-key (kbd "C-c h") 'helm-command-prefix)
+(setq helm-split-window-inside-p t
+      helm-move-to-line-cycle-in-source t
+      helm-ff-search-library-in-sexp t
+      helm-echo-input-in-header-line t)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x C-a") 'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-c o") 'helm-occur)
+(global-set-key (kbd "C-c i") 'helm-imenu)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
+(global-set-key (kbd "C-x C-r") 'helm-recentf)
+(define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
+(define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
 
 
 ;; ###########################################
@@ -32,12 +60,13 @@
 ;; エラー音を鳴らなくする
 (setq ring-bell-function 'ignore)
 
+
 ;; Undo
 (global-set-key (kbd "C-z") 'undo)
 
 ;; tabキーを有効化する
-(setq-default indent-tabs-mode t)
-(setq default-tab-width 4)
+;'(setq-default indent-tabs-mode t)
+;'(setq default-tab-width 4)
 
 
 ;; 行番号の表示
@@ -50,8 +79,8 @@
       (set-face-attribute 'line-number-current-line nil
 			  :foreground "gold")))
 ;; タイトルにフルパス表示
-'(set-default 'mode-line-buffer-identification
-	     '(buffer-file-name ("%f")("%b")))
+;'(set-default 'mode-line-buffer-identification
+;	     '(buffer-file-name ("%f")("%b")))
 
 ;; scratchの初期メッセージ消去
 (setq initial-scratch-message "")
@@ -60,10 +89,10 @@
 (windmove-default-keybindings)
 (setq windmove-wrap-around t)
 
-'(mouse-wheel-mode t)
-'(setq mouse-wheel-scroll-amount '(1 ((shift) . 2) ((control)))
-'      mouse-wheel-progressive-speed nil)
-'(setq scroll-preserve-screen-position 'always)
+;(mouse-wheel-mode t)
+;'(setq mouse-wheel-scroll-amount '(1 ((shift) . 2) ((control)))
+;'      mouse-wheel-progressive-speed nil)
+;'(setq scroll-preserve-screen-position 'always)
 
 ;; カレントの行を強調する
 (global-hl-line-mode t)
