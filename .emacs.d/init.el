@@ -4,7 +4,13 @@
 ;;  packageの設定
 ;; ###########################################
 (package-initialize)
-      
+
+(when (require 'package nil t)
+  (add-to-list 'package-archives
+	       '("melpa-stable" . "https://stable.melpa.org.packages/"))
+  (package-initialize))
+
+
 ;; ###########################################
 ;; 見た目の設定
 ;; ###########################################      
@@ -54,10 +60,10 @@
 (windmove-default-keybindings)
 (setq windmove-wrap-around t)
 
-(mouse-wheel-mode t)
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 2) ((control)))
-      mouse-wheel-progressive-speed nil)
-(setq scroll-preserve-screen-position 'always)
+'(mouse-wheel-mode t)
+'(setq mouse-wheel-scroll-amount '(1 ((shift) . 2) ((control)))
+'      mouse-wheel-progressive-speed nil)
+'(setq scroll-preserve-screen-position 'always)
 
 ;; カレントの行を強調する
 (global-hl-line-mode t)
