@@ -50,7 +50,7 @@
       (set-face-attribute 'line-number-current-line nil
 			  :foreground "gold")))
 ;; タイトルにフルパス表示
-(set-default 'mode-line-buffer-identification
+'(set-default 'mode-line-buffer-identification
 	     '(buffer-file-name ("%f")("%b")))
 
 ;; scratchの初期メッセージ消去
