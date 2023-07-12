@@ -20,6 +20,8 @@
 ;; ###########################################
 ;;  パッケージのインストールと設定
 ;; ###########################################
+
+;; helmの設定
 (el-get-bundle helm)
 (require 'helm)
 (global-set-key (kbd "C-c h") 'helm-command-prefix)
@@ -37,6 +39,22 @@
 (global-set-key (kbd "C-x C-r") 'helm-recentf)
 (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
 (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
+
+;; auto-complete
+(el-get-bundle auto-complete)
+(require 'auto-complete)
+(require 'fuzzy)
+(setq ac-use-fuzzy t)
+(global-auto-complete-mode t)
+(ac-config-default)
+(setq ac-delay 0)
+(setq ac-auto-show-menu 0.05)
+(ac-set-trigger-key "TAB")
+(setq ac-use-menu-map t)
+(setq ac-menu-height 25)
+(setq ac-auto-start 2)
+(setq ac-ignore-case t)
+(define-key ac-completing-map (kbd "<tab>") 'ac-complete)
 
 
 ;; ###########################################
@@ -67,7 +85,6 @@
 (setq-default indent-tabs-mode t)
 (setq default-tab-width 4)
 
-
 ;; 行番号の表示
 (if (version<= "26.0.50" emacs-version)
     (progn
@@ -77,9 +94,6 @@
 			  :background "#131521")
       (set-face-attribute 'line-number-current-line nil
 			  :foreground "gold")))
-;; タイトルにフルパス表示
-;'(set-default 'mode-line-buffer-identification
-;	     '(buffer-file-name ("%f")("%b")))
 
 ;; scratchの初期メッセージ消去
 (setq initial-scratch-message "")
@@ -87,11 +101,6 @@
 ;; windowの切り替えをShift + 矢印で行う
 (windmove-default-keybindings)
 (setq windmove-wrap-around t)
-
-;(mouse-wheel-mode t)
-;'(setq mouse-wheel-scroll-amount '(1 ((shift) . 2) ((control)))
-;'      mouse-wheel-progressive-speed nil)
-;'(setq scroll-preserve-screen-position 'always)
 
 ;; カレントの行を強調する
 (global-hl-line-mode t)
