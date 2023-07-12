@@ -60,13 +60,12 @@
 ;; エラー音を鳴らなくする
 (setq ring-bell-function 'ignore)
 
-
 ;; Undo
 (global-set-key (kbd "C-z") 'undo)
 
 ;; tabキーを有効化する
-;'(setq-default indent-tabs-mode t)
-;'(setq default-tab-width 4)
+(setq-default indent-tabs-mode t)
+(setq default-tab-width 4)
 
 
 ;; 行番号の表示
