@@ -56,6 +56,26 @@
 (setq ac-ignore-case t)
 (define-key ac-completing-map (kbd "<tab>") 'ac-complete)
 
+;; googlethis
+(el-get-bundle Kungsgeten/selected.el)
+(el-get-bundle Malabarba/emacs-google-this)
+(google-this-mode 1)
+(with-eval-after-load "google-this"
+  (defun my:google-this()
+    "選択範囲をGoogleで検索する"
+    (interactive)
+    (message "ok")
+    (google-this (current-word) t)))
+(when (require 'selected nil t)
+  (define-key selected-keymap (kbd ";") #'comment-dwim)
+  (define-key selected-keymap (kbd "=") #'count-words-region)
+  (define-key selected-keymap (kbd "f") #'describe-function)
+  (define-key selected-keymap (kbd "g") #'my:google-this)
+  (selected-global-mode 1)
+)    
+
+
+
 
 ;; ###########################################
 ;; 見た目の設定
