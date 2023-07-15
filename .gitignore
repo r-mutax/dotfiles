@@ -5,6 +5,7 @@
 !/setup.sh
 !/.emacs.d
 !/.emacs.d/init.el
+!/.bash_profile
 
 !/LICENSE
 !/README.md
