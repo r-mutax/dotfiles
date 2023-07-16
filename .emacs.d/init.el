@@ -1,4 +1,5 @@
-; init.el
+
+;; init.el
 
 ;; ###########################################
 ;;  el-getの設定
@@ -74,8 +75,8 @@
   (selected-global-mode 1)
 )    
 
-
-
+;; magit
+(el-get-bundle magit)
 
 ;; ###########################################
 ;; 見た目の設定
@@ -105,6 +106,7 @@
 (setq-default indent-tabs-mode t)
 (setq default-tab-width 4)
 
+
 ;; 行番号の表示
 (if (version<= "26.0.50" emacs-version)
     (progn
@@ -124,4 +126,5 @@
 
 ;; カレントの行を強調する
 (global-hl-line-mode t)
+
 
