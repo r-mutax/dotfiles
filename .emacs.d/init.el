@@ -143,6 +143,16 @@
 ;; カレントの行を強調する
 (global-hl-line-mode t)
 
+;; ###########################################
+;; プログラム言語の設定
+;; ###########################################      
+(add-hook 'c-mode-hook '(lambda()
+			  (setq c-basic-offset 4)
+			  (setq tab-width 4)
+			  (setq indent-tabs-mode nil)
+			  ))
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
