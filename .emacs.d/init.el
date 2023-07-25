@@ -1,6 +1,5 @@
-
-;; init.el
-
+; init.el
+(setq byte-compile-warnings '(cl-functions))
 ;; ###########################################
 ;;  el-getの設定
 ;; ###########################################
@@ -75,8 +74,26 @@
   (selected-global-mode 1)
 )    
 
-;; magit
-(el-get-bundle magit)
+;; undo-tree
+(el-get-bundle undo-tree)
+(global-undo-tree-mode t)
+(global-set-key (kbd "M-/") 'undo-tree-redo)
+
+;; rainbow-delimiters
+(el-get-bundle rainbow-delimiters)
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(require 'cl-lib)
+(require 'color)
+(defun rainbow-delimiters-using-stronger-colors ()
+  (interactive)
+  (cl-loop
+   for index from 1 to rainbow-delimiters-max-face-count
+   do
+   (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
+     (cl-callf color-saturate-name (face-foreground face) 30))))
+(add-hook 'emacs-startup-hook 'rainbow-delimiters-using-stronger-colors)
+
 
 ;; ###########################################
 ;; 見た目の設定
@@ -106,7 +123,6 @@
 (setq-default indent-tabs-mode t)
 (setq default-tab-width 4)
 
-
 ;; 行番号の表示
 (if (version<= "26.0.50" emacs-version)
     (progn
@@ -127,4 +143,25 @@
 ;; カレントの行を強調する
 (global-hl-line-mode t)
 
+;; ###########################################
+;; プログラム言語の設定
+;; ###########################################      
+(add-hook 'c-mode-hook '(lambda()
+			  (setq c-basic-offset 4)
+			  (setq tab-width 4)
+			  (setq indent-tabs-mode nil)
+			  ))
 
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(queue)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
