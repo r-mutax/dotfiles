@@ -2,6 +2,11 @@
 
 # $HOME/dotfilesで実行されるはず
 
+# texinfoのインストール
+sudo apt install -y emacs
+sudo apt install -y texinfo
+
+
 # シンボリックリンクを張る
 ln -s $HOME/dotfiles/.emacs.d $HOME/.emacs.d
 ln -s $HOME/dotfiles/.bash_profile $HOME/.bash_profile
@@ -12,4 +17,5 @@ cd $HOME/.emacs.d
 mkdir lisp
 cd $HOME/dotfiles
 alias emacs='emacs -nw'
+
 
